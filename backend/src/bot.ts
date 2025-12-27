@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf';
 
-export async function initBot() {
+export function initBot() {
   const token = process.env.BOT_TOKEN;
   const frontendUrl = process.env.FRONTEND_URL;
 
@@ -29,9 +29,5 @@ export async function initBot() {
     });
   });
 
-  await bot.launch();
-  console.log('Bot launched');
-
-  process.once('SIGINT', () => bot.stop('SIGINT'));
-  process.once('SIGTERM', () => bot.stop('SIGTERM'));
+  return bot;
 }
