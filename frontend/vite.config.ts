@@ -23,13 +23,7 @@ export default defineConfig({
     // Allow network access to dev server
     host: "0.0.0.0",
     allowedHosts: true,
-    port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://backend:3000',
-        changeOrigin: true
-      }
-    }
+    port: 5173
   },
 });
 

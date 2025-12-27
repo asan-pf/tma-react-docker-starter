@@ -22,7 +22,7 @@ echo "Starting ngrok..."
 if curl -s $NGROK_API >/dev/null 2>&1; then
     echo "ngrok is already running"
 else
-    ngrok http 8000 --log=stdout > /tmp/ngrok.log 2>&1 &
+    ngrok http 8080 --log=stdout > /tmp/ngrok.log 2>&1 &
     NGROK_PID=$!
     echo "NGROK_PID : ${NGROK_PID}"
 fi
@@ -69,8 +69,20 @@ curl -sS -X POST "https://api.telegram.org/bot${BOT_TOKEN}/setChatMenuButton" \
   }
 }
 EOF
-
 echo ""
 echo "✅ Telegram setChatMenuButton call sent."
+
+echo "Setting Telegram webhook URL to ${PUBLIC_URL}..."
+
+curl -sS -X POST "https://api.telegram.org/bot${BOT_TOKEN}/setWebhook" \
+  -H "Content-Type: application/json" \
+  -d @- <<EOF
+{
+  "url": "${PUBLIC_URL}"
+}
+EOF
+echo ""
+echo "✅ Telegram setWebhook call sent."
+
 echo "Starting docker compose containers..."
 docker compose up
