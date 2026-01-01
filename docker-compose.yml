@@ -5,15 +5,15 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: overpass-backend
+    container_name: tma-starter-backend
     env_file:
       - ./backend/.env
     environment:
       NODE_ENV: development
       PORT: 3000
       FRONTEND_URL: ${PUBLIC_URL}
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     volumes:
       - ./backend:/backend
       - backend_node_modules:/backend/node_modules
@@ -41,7 +41,7 @@ services:
   # Nginx proxy routes requests to back and front, runs the port that is served by Ngrok
   nginx:
     image: nginx:1.27-alpine
-    container_name: overpass-nginx
+    container_name: tma-starter-nginx
     depends_on:
       - frontend
       - backend
