@@ -1,17 +1,14 @@
-import './App.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import { UserInfoPage } from "./pages/UserInfoPage";
+import { AuthPage } from "./pages/AuthPage";
 
-function App() {
+const router = createBrowserRouter([
+  { path: "/", element: <HomePage /> },
+  { path: "/user", element: <UserInfoPage /> },
+  { path: "/auth", element: <AuthPage /> },
+]);
 
-  return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <h1 className="text-3xl font-bold underline">
-          Tailwind is WORKING 🚀
-        </h1>
-
-      </div>
-    </>
-  )
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App
