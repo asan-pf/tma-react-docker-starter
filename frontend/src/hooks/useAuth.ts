@@ -3,7 +3,6 @@ import {
   useSignal as useTgSignal,
   initDataState,
 } from "@telegram-apps/sdk-react";
-// import { useSignal as usePreactSignal } from "@preact/signals-react";
 import { signal } from "@preact/signals-react";
 
 import { authenticated, setAuthenticated } from "../auth.store";
@@ -12,9 +11,6 @@ export function useAuth() {
   const initData = useTgSignal(initDataState);
   const user = initData?.user;
   const token = signal("");
-  // ✅ subscribe to preact signal
-  // const tokenSig = usePreactSignal(authToken);
-  // const token = tokenSig.value;
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

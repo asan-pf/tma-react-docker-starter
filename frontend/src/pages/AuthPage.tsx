@@ -42,12 +42,7 @@ export const AuthPage: FC = () => {
             <p className="text-sm text-zinc-600">
               You are authenticated and can see this section.
             </p>
-            <button onClick={() => {
-              console.log("before logout authenticated =", authenticated.value);
-              logout();
-
-              console.log("after logout clicked", authenticated.value);
-            }} className="text-sm underline text-zinc-600">
+            <button onClick={logout} className="text-sm underline text-zinc-600">
               Logout
             </button>
           </div>
