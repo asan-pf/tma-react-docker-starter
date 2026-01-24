@@ -48,6 +48,11 @@ It will expose port **8080** so that you should use some service to expose you a
 sudo chmod +x ./start-tma.sh
 ./start-tma.sh
 ```
+## Debugging
+1. Stop running docker containers befor rerunning `./start-tma.sh`
+```sh
+docker container prune
+```
 
 ## Useful links
 - [reactjs-template](https://github.com/Telegram-Mini-Apps/reactjs-template)

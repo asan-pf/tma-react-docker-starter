@@ -55,6 +55,12 @@ fi
 export PUBLIC_URL
 echo "PUBLIC_URL : $PUBLIC_URL"
 echo "Setting Telegram Mini App menu button URL to ${PUBLIC_URL}..."
+# SHOW BOT USERNAME
+BOT_USERNAME=$(curl -s "https://api.telegram.org/bot${BOT_TOKEN}/getMe" \
+  | jq -r '.result.username')
+
+echo ""
+echo "Bot username: ${BOT_USERNAME}"
 
 curl -sS -X POST "https://api.telegram.org/bot${BOT_TOKEN}/setChatMenuButton" \
   -H "Content-Type: application/json" \
