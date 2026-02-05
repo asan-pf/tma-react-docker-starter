@@ -1,46 +1,17 @@
 import type { FC } from "react";
-import { useSignal, initDataState, type User } from "@telegram-apps/sdk-react";
+import { themeParams, useSignal, initDataState, type User } from "@telegram-apps/sdk-react";
 import PageLayout from "../components/PageLayout";
+import { Row } from "../components/Row";
 
-type RowProps = {
-  label: string;
-  value: string | number;
-  imageUrl?: string;
-}
-function Row({ label, value, imageUrl }: RowProps) {
-  return (
-    <div className="">
-
-      {imageUrl ? (
-        <div className="flex justify-center"> 
-
-          <div
-            className="h-20 w-20 shrink-0 rounded-full bg-zinc-200
-                        mask mask-circle overflow-hidden"
-          >
-            <img
-              src={imageUrl}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-            
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-baseline justify-between gap-4">
-          <div className="text-xs font-medium text-zinc-500">{label}</div>
-          <div className="text-sm font-medium text-zinc-900 break-all">{value}</div>
-        </div>
-
-      )}
-    </div>
-  );
-}
 
 export const UserInfoPage: FC = () => {
+  
+  const tp = useSignal(themeParams.state);
+  const isDark = useSignal(themeParams.isDark)
+  // console.log('tp', tp);
   const initData = useSignal(initDataState);
   const user = initData?.user;
-  console.log('initData :', initData);
+  // console.log('initData :', initData);
   return (
     <PageLayout title="UserInfo">
       <div className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
@@ -60,6 +31,8 @@ export const UserInfoPage: FC = () => {
             />
             {user.username ? <Row label="Username" value={`@${user.username}`} /> : null}
             {user.language_code ? <Row label="Language" value={user.language_code} /> : null}
+            {tp.bg_color ? <Row label="Background color" value={`${tp.bg_color}`} /> : null}
+            {isDark ? <Row label="Theme" value={"Dark theme"} /> : <Row label="Theme" value={"Light theme"} />}
           </div>
         )}
       </div>
